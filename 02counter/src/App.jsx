@@ -2,13 +2,17 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  let [counter,setCounter] = useState(5)
+  const [counter,setCounter] = useState(5)
   // let counter =5;
   const addVal = ()=>{
     // console.log("Value added",counter);
     // counter = counter+1;
     if(counter<20){
-       setCounter(counter+1);
+      setCounter(counter+1);
+      //  setCounter(prevCounter => prevCounter+1);
+      //  setCounter(prevCounter => prevCounter+1);
+      //  setCounter(prevCounter => prevCounter+1);
+      //  setCounter(prevCounter => prevCounter+1);
     }
    
   }
