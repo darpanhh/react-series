@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_KEY = '2a4f9017be10e44e890d48e21c7fa22a';
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 function Weather() {
   const [city, setCity] = useState("");
@@ -26,6 +26,7 @@ function Weather() {
       }
 
       const data = await response.json();
+      console.log(data);
       setWeather(data);
 
     } catch (err) {
@@ -46,7 +47,7 @@ function Weather() {
         placeholder="Enter city name"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        
+        onKeyDown={(e) => e.key==='Enter' && fetchWeather()}
       />
 
       <br /><br />
@@ -56,9 +57,18 @@ function Weather() {
       </button>
 
       <br /><br />
+      {loading && <h2>Loading...</h2>}
+      {error && <h2 style={{color:'red'}}>{error}</h2>}
+      {weather && (
+      <div className="weather-card">
+      <h2>{weather.name}</h2> 
+        <p>🌡Temperature: {weather.main.temp} °C </p>
+        <p>💧Humidity: {weather.main.humidity} %</p>
+        <p>🌫Description: {weather.weather[0].description}</p>
+      </div>
+      )}
 
-      
-      
+
     </div>
   );
 }
